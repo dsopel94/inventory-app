@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>App to add inventory for warehouses</title>
+	<link href="style.css" type="text/css" rel="stylesheet">
+	<meta charset="utf-8">
+</head>
+<body>
+	<form class="search-form">
+		<div class="main">
+			<input type="text" placeholder="Search for inventory...">
+			<button id="search">Search for Items</button>
+			<button id="add">Add items to your inventory</button>
+			<select id="form">
+				<option value="form">Form</option>
+				<option value="solid">Solid</option>
+				<option value="liquid">Liquid</option>
+				<option value="powder">Powder</option>
+			</select>
+			<select id="hazardous">
+				<option value="yes">Yes</option>
+				<option value="no">No</option>
+			</select>
+			<select id="search-location">
+				<option class="search-location">Location</option>
+			</select>
+			<ul class="results"></ul>
+		</div>
+	</form>
+	<form class="add-inventory-form">	
+		<div class="add-inventory hidden">
+			<label for="name">Product Name: </label>
+				<input type="text" id="name" placeholder="Product Name"/>
+			<label for="add-location"> Location: </label>
+				<select id="add-location">
+					<option value="locations">Locations</option>
+				</select>
+			<label for="form"> Form: </label>
+				<select id="add-form">
+					<option value="form">Form</option>
+					<option value="solid">Solid</option>
+					<option value="liquid">Liquid</option>
+					<option value="powder">Powder</option>
+				</select>
+			<label for="add-hazardous">Hazardous:</label>
+				<select id="add-hazardous">
+					<option value="yes">Yes</option>
+					<option value="no">No</option>
+				</select>
+			<button id="add-location-input">Add Location</button>
+				<!-- add input with add button that allows user to add a location -->
+			<button id="add-image">Add Image</button>
+			<button id="submit">Submit</button>
+			<button class="back">Back</button>
+		</div>
+	</form>			
+		<div class="item-info hidden">
+			<p>Location:</p>
+			<p>Form:</p>
+			<p>Hazardous?</p>
+			<button id="edit-item"></button>
+			<button id="delete"></button>
+			<button class="back"></button>
+		</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="app.js" type="text/javascript"></script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+language: node_js
+node_js: node
+deploy:
+  provider: heroku
+  api_key:
+    secure: LWUs1DxCHKOw0Be777T+9QQNEzEIghQi88WF5bxkDnYPOikvDYtjYV2BiZQ5H6T96KitG/+bZNKqHxRoAJU/CCPJapEXmmuQEHTXss0Br5IdeuuU+6ryiXZS+a4uIAItflu4VljSr68eLz8iyfgMDR1kxdeN5r0TivbeREYTL/ZCBZt0c4Cbes6ixa19qdBTajdGhqOoSmBSFBojJ1dEK0hfq2eaOEkzETqA1rSANLdiYWn6pTFUMmRbMUpq410kqrM79haIjbVRmwqQ3JNS8kyoZZ2ElnROsGYFmAqvQAMC+mPAdwzc75t8OCMk/lR4pTOF3GYI+ea/7P+IEmycr1o0g6ljszuwQ6bAWNfa2LJ9lAbZz6TOO0RKR4SGnjjoEsRN7g6AssvEsOWImiMwvJ4HdP0+lm7dpTgvf2SEunaUjmrWAjWLZ1oc9AJscsgcMoBezYdU4lkySMi8ztMUwKOOLbIskcI9yeTQEPHcc/fEhQmXtSUjs6GsoMKzQuHeFKpwaaUVvVoEbspcwphP9Fb9Av3aHjN+JRGzklPTr9QapzSX0QtXPZ8ToZXf/G5dllZ+bZw7oihkVLvRusSe/vpX7A61mpZcuVws9fbga9XL/zvHz/q5MNW3t32kSzTCrMZSy+xmpTx/D1jys/3T+5ChWgBQM3/4mWBPEtjMwNk=
+  app: inventory-app
+  on:
+    repo: dsopel94/inventory-app

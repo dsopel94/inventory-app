@@ -44,7 +44,7 @@ app.get('/items/:id', (req, res) => {
 })
 
 app.post('/items', (req,res) => {
-  const requiredFields = ['form','quantity','hazardous'];
+  const requiredFields = ['product','location','form','quantity','hazardous'];
   for (let i=0; i<requiredFields.length;i++) {
     const field = requiredFields[i];
     if (!(field in req.body)) {
@@ -56,14 +56,13 @@ app.post('/items', (req,res) => {
 
   InventoryList
     .create({
-      id: req.body.id,
       product: req.body.product,
       form: req.body.form,
       hazardous: req.body.hazardous,
       location: req.body.location,
       quantity: req.body.quantity
     })
-    .then(item => res.status(201).json(InventoryList))
+    .then(item => res.status(201).json(item.apiRepr()))
     .catch(err => {
       console.error(err);
       res.status(500).json({error: 'Something went wrong'});
@@ -71,8 +70,8 @@ app.post('/items', (req,res) => {
 });
 
 app.put('/items/:id', (req, res) => {
-  if (!(req.params.id && req.body.id && req.params.id === req.body.id)) {
-    res.status(400).json({
+  if (req.params.id && req.body.id && req.params.id !== req.body.id) {
+    return res.status(400).json({
       error: 'Request path id and request body id values must match'
     });
   }

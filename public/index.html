@@ -33,8 +33,8 @@
 			<input type="text" id="add-name" required placeholder="Product Name"/>
 			<label for="add-qty">Quantity: </label>
 			<input type="number" id="add-qty" min="0" required placeholder="Add quantity"/>
-			<label for="add-location" required> Location: </label>
-			<select id="add-location">
+			<label for="add-location"> Location: </label>
+			<select id="add-location" required>
 				<option value="locations">Locations</option>
 			</select>
 			<label for="form"> Form: </label>
@@ -45,7 +45,7 @@
 				<option value="gas">Gas</option>
 			</select>
 
-			<label for="add-hazardous">Hazardous:</label>
+			<label for="add-hazardous" required>Hazardous:</label>
 			<select id="add-hazardous" required>
 				<option value="yes">Yes</option>
 				<option value="no">No</option>
@@ -60,22 +60,22 @@
 	<form class="edit-item-form">		
 		<div class="item-info hidden">
 			<label for="edit-product">Product:</label>
-			<input type="text" id="edit-product" class="edit-input"/>
+			<input type="text" required id="edit-product" class="edit-input"/>
 			<label for="edit-form">Form:</label>
-			<select id="edit-form" class="edit-input">
+			<select id="edit-form" required class="edit-input">
 				<option value="solid">Solid</option>
 				<option value="liquid">Liquid</option>
 				<option value="gas">Gas</option>
 			</select>
 			<label for="edit-quantity">Quantity:</label>
-			<input type="number" id="edit-quantity" class="edit-input"/>
+			<input type="number" required id="edit-quantity" class="edit-input"/>
 			<label for="hazardous">Hazardous?</label>
-			<select id="edit-hazardous" class="edit-hazardous">
+			<select id="edit-hazardous" required class="edit-hazardous">
 				<option value=true>Yes</option>
 				<option value=false>No</option>
 			</select>
-			<label for="location">Location</label>
-			<select id="edit-location">
+			<label for="location" >Location</label>
+			<select id="edit-location" required>
 				<option value="lobby">Lobby</option>
 			</select>
 			<button id="edit-item">Edit Item</button>

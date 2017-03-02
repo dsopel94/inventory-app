@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const inventorySchema = mongoose.Schema({
   product: String,
   form: String,
-  hazardous: Boolean,
+  hazardous: String,
   location: String,
   quantity: Number
 });

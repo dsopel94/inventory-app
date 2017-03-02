@@ -151,6 +151,9 @@ function init() {
   $('#delete').on('click',function(event){
   	event.preventDefault();
   	deleteProduct($('.edit-item-form').data('product-id'))
+  	getProducts();
+  	$('.main').removeClass('hidden');
+  	$('.edit-item-form').addClass('hidden')
   }) 
 }
 

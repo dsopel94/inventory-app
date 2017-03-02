@@ -24,7 +24,7 @@
 //  	}]
 function getProducts() {
   var items = []
-  axios.get('http://localhost:8080/items').then(function({ data, status }) {
+  axios.get('/items').then(function({ data, status }) {
     if ( status !== 200) {
     	return alert ('your server is probably not running')
     }
@@ -55,7 +55,7 @@ function addProduct() {
 		quantity: $('#add-qty').val()
 	}; 
 	
-	axios.post('http://localhost:8080/items', newProd)
+	axios.post('/items', newProd)
 		.then(function(res) {
 			$('#add-name').val('')
 			$('#add-form').val(null)
@@ -72,6 +72,18 @@ function addProduct() {
 
 }
 
+function deleteProduct(id) {
+	axios.delete('/items/' + id)
+	.then(function(res) {
+		$('.item-info').addClass('hidden')
+		$('.main').removeClass('.hidden')
+		getProducts();
+	})
+	.catch(function(err){
+		console.error("delete failed", err)
+	})
+}
+
 function editProduct(id) {
 	var editProd = {
 		product: $('#edit-product').val(),
@@ -80,7 +92,7 @@ function editProduct(id) {
 		location: $('#edit-location').val(),
 		quantity: $('#edit-quantity').val()
 	}
-	axios.put('http://localhost:8080/items/' + id, editProd)
+	axios.put('/items/' + id, editProd)
 		.then(function(res) {
 			getProducts();
 			$('.item-info').addClass('hidden')
@@ -120,7 +132,7 @@ function init() {
     prompt("Please enter an image URL")
   })
   $('.results').on('click', '.item-left', function(event) {
-		axios.get('http://localhost:8080/items/'+ $(this).data('product-id'))
+		axios.get('/items/'+ $(this).data('product-id'))
 			.then(function({ data }) {		
 		    $('#edit-product').val(data.product)
 		    $('#edit-quantity').val(data.quantity)
@@ -135,6 +147,10 @@ function init() {
 	$('.edit-item-form').on('submit', function(event) {
   	event.preventDefault();
   	editProduct($(this).data('product-id'));
+  })
+  $('#delete').on('click',function(event){
+  	event.preventDefault();
+  	deleteProduct($('.edit-item-form').data('product-id'))
   }) 
 }
 

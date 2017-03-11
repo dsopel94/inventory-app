@@ -104,8 +104,8 @@ function editProduct(id) {
 	}
 	axios.put('/items/' + id, editProd)
 		.then(function(res) {
-			state.image = '';
 			getProducts();
+			state.image = '';
 			$('.item-info').addClass('hidden')
 			$('.main').removeClass('hidden')
 		})
@@ -152,7 +152,7 @@ function init() {
   $('.results').on('click', 'li', function(event) {
 		axios.get('/items/'+ $(this).find('.item-left').data('product-id'))
 			.then(function({ data }) {		
-			console.log(data)
+				state.image = data.url;
 		    $('#edit-product').val(data.product)
 		    $('#edit-quantity').val(data.quantity)
 		    $('#edit-form').val(data.form)

@@ -28,7 +28,9 @@ function showProducts(items) {
 }
 
 function renderLocations() {
-	var locationsHTML = [];
+	var locationsHTML = [
+		'<option>Filter By Location</option>'
+	];
 	axios.get('/locations').then(function({data}) {
 		data.forEach(function(element) {
 			locationsHTML.push('<option value="' + element.name + '">' +
@@ -178,15 +180,28 @@ function init() {
   $('.search-input').on('keypress', function(event) {
   	var that = this
   	var filtered_items = global_items.filter(function(item){
-	  var query = $(that).val()
-	  var regex = new RegExp(query, 'gi')
-	  return item.product.match(regex)
-	})
-	if (filtered_items.length) {
-		showProducts(filtered_items)
-	} else {
-		showProducts(global_items)
-	}
+		  var query = $(that).val()
+		  var regex = new RegExp(query, 'gi')
+		  return item.product.match(regex)
+		})
+		if (filtered_items.length) {
+			showProducts(filtered_items)
+		} else {
+			showProducts(global_items)
+		}
+  })
+  $('#search-location').on('change', function(event) {
+  	var that = this
+  	var query = $(that).val()
+  	var filtered_items = global_items.filter(function(item){
+  		return item.location === query
+  	})
+  	if (filtered_items.length) {
+			showProducts(filtered_items)
+		} else {
+			$('.results').html('<div>No Results</div>')
+		}
+
   })
 }
 

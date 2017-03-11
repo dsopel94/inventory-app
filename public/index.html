@@ -4,42 +4,38 @@
 	<title>App to add inventory for warehouses</title>
 	<link href="style.css" type="text/css" rel="stylesheet">
 	<meta charset="utf-8">
+	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
 </head>
 <body>
-	<form class="search-form">
+	<form name="search-form" class="search-form">
 		<div class="main">
-			<input type="text" placeholder="Search for inventory...">
-			<button id="search">Search for Items</button>
+			<input type="text" class="search-input" placeholder="Search for inventory...">
 			<button id="add">Add items to your inventory</button>
-			<select id="form">
+			<!-- <select id="form">
 				<option value="form">Form</option>
 				<option value="solid">Solid</option>
 				<option value="liquid">Liquid</option>
 				<option value="gas">Gas</option>
-			</select>
-			<select id="hazardous">
+			</select> -->
+			<!-- <select id="hazardous">
 				<option value="yes">Yes</option>
 				<option value="no">No</option>
-			</select>
-			<select id="search-location">
-				<option class="search-location">Location</option>
-			</select>
+			</select> -->
+			<select id="search-location"></select>
 			<ul class="results"></ul>
 		</div>
 	</form>
-	<form class="add-inventory-form">	
+	<form name="add-form" class="add-inventory-form">	
 		<div class="add-inventory hidden">
 			<label for="add-name">Product Name: </label>
 			<input type="text" id="add-name" required placeholder="Product Name"/>
 			<label for="add-qty">Quantity: </label>
 			<input type="number" id="add-qty" min="0" required placeholder="Add quantity"/>
 			<label for="add-location"> Location: </label>
-			<select id="add-location" required>
-				<option value="locations">Locations</option>
-			</select>
+			<select id="add-location" required></select>
 			<label for="form"> Form: </label>
 			<select id="add-form" required>
-				<option value="form">Form</option>
+				<option>Form</option>
 				<option value="solid">Solid</option>
 				<option value="liquid">Liquid</option>
 				<option value="gas">Gas</option>
@@ -50,19 +46,20 @@
 				<option value="yes">Yes</option>
 				<option value="no">No</option>
 			</select>
-			<button id="add-location-input">Add Location</button>
+			<button class="add-location-input">Add Location</button>
 				<!-- add input with add button that allows user to add a location -->
 			<button id="add-image">Add Image</button>
 			<button id="submit">Submit</button>
 			<button class="back">Back</button>
 		</div>
 	</form>	
-	<form class="edit-item-form">		
+	<form name="edit-form" class="edit-item-form">		
 		<div class="item-info hidden">
 			<label for="edit-product">Product:</label>
 			<input type="text" required id="edit-product" class="edit-input"/>
 			<label for="edit-form">Form:</label>
 			<select id="edit-form" required class="edit-input">
+				<option>Form</option>
 				<option value="solid">Solid</option>
 				<option value="liquid">Liquid</option>
 				<option value="gas">Gas</option>
@@ -71,14 +68,14 @@
 			<input type="number" required id="edit-quantity" class="edit-input"/>
 			<label for="hazardous">Hazardous?</label>
 			<select id="edit-hazardous" required class="edit-hazardous">
-				<option value=true>Yes</option>
-				<option value=false>No</option>
+				<option value="yes">Yes</option>
+				<option value="no">No</option>
 			</select>
 			<label for="location" >Location</label>
-			<select id="edit-location" required>
-				<option value="lobby">Lobby</option>
-			</select>
+			<select id="edit-location" required></select>
 			<button id="edit-item">Edit Item</button>
+			<button id="edit-image">Edit Image</button>
+			<button class="add-location-input">Add Location</button>
 			<button id="delete">Delete</button>
 			<button class="back">Back</button>
 		</div>

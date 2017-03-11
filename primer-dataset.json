@@ -2,7 +2,7 @@
 	"product": "product 1",
 	"form": "form 1",
 	"hazardous": true,
-	"location": "location 1",
+	"location": abc123,
 	"quantity": 1
 }
 {

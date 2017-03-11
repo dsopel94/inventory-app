@@ -1,41 +1,22 @@
-// var items = [{
-// 	product: "Ammonium Sulfate",
-// 	form: "solid",
-// 	hazardous: "Yes",
-// 	location: "Laboratory",
-// 	quantity: 0,
-// 	url: "http://www.aluminumsulfate.net/wp-content/uploads/2015/09/Ammonium-Sulfate-768x576.jpg"
-//   },
-// 	{
-// 	product: "Windex",
-//   form: "liquid",
-//   hazardous: "No",
-//   location: "Closet",
-//   quantity: "3",
-//   url: "https://i0.wp.com/thecrazycouponchick.com/wp-content/uploads/2016/11/Windex.jpg?resize=800%2C445"
-//  	},
-//  	{
-//  	product: "Bleach",
-//  	form: "liquid",
-//  	hazardous: "Yes",
-//  	location: "Bathroom",
-//  	quantity: "2",
-//  	url: "https://cdn01-www-clorox-com.scdn3.secure.raxcdn.com/wp-content/uploads/2017/01/hero-Bleach-with-Pinesol-Lemon.png"
-//  	}]
+var state = {
+  	image: ''
+  }
+var global_items = []
 function getProducts() {
-  var items = []
   axios.get('/items').then(function({ data, status }) {
     if ( status !== 200) {
     	return alert ('your server is probably not running')
     }
+    global_items = data;
     showProducts(data)
+    renderLocations();
   })
 }
 
 function showProducts(items) {
 	var itemsHTML = [];
-	var url = 'http://placehold.it/100x100'
 	items.forEach(function(element) {
+		var url = element.url ? element.url : 'http://placehold.it/100x100'
 	  itemsHTML.push('<li><div class="item-left" data-product-id="' + element.id + '"><p><span class = "prod-name">' +
 	    'Product: ' + element.product + '</p></span><span class="prod-loc">' +
 	    'Location: ' + element.location + '</span><span class="qty">' +
@@ -46,13 +27,25 @@ function showProducts(items) {
 	$('.results').html(itemsHTML)
 }
 
+function renderLocations() {
+	var locationsHTML = [];
+	axios.get('/locations').then(function({data}) {
+		data.forEach(function(element) {
+			locationsHTML.push('<option value="' + element.name + '">' +
+			element.name + '</option>' )
+		})
+		$('#add-location, #search-location, #edit-location').html(locationsHTML)
+	})
+}
+
 function addProduct() {
 	var newProd = {
 		product: $('#add-name').val(),
 		form: $('#add-form').val(),
 		hazardous: $('#add-hazardous').val(),
-		location: $('#add-location').val() ,
-		quantity: $('#add-qty').val()
+		location: $('#add-location').val(),
+		quantity: $('#add-qty').val(),
+		url: state.image
 	}; 
 	
 	axios.post('/items', newProd)
@@ -65,6 +58,7 @@ function addProduct() {
 			$('.add-inventory').addClass('hidden');
 		  $('.main').removeClass('hidden');
 		  getProducts();
+		  state.image = '';
 		})
 		.catch(function(err){
 			console.error(err)
@@ -72,11 +66,24 @@ function addProduct() {
 
 }
 
+function addLocation(locationInput) {
+	var newLocation = {
+		name: locationInput
+	}
+	axios.post('/locations', newLocation)
+	.then(function(res) {
+		renderLocations();
+	})
+	.catch(function(err){
+		console.error(err)
+	})
+}
+
 function deleteProduct(id) {
 	axios.delete('/items/' + id)
 	.then(function(res) {
-		$('.item-info').addClass('hidden')
-		$('.main').removeClass('.hidden')
+		//$('.item-info').addClass('hidden')
+		//$('.main').removeClass('.hidden')
 		getProducts();
 	})
 	.catch(function(err){
@@ -90,10 +97,12 @@ function editProduct(id) {
 		form: $('#edit-form').val(),
 		hazardous: $('#edit-hazardous').val(),
 		location: $('#edit-location').val(),
-		quantity: $('#edit-quantity').val()
+		quantity: $('#edit-quantity').val(),
+		url: state.image
 	}
 	axios.put('/items/' + id, editProd)
 		.then(function(res) {
+			state.image = '';
 			getProducts();
 			$('.item-info').addClass('hidden')
 			$('.main').removeClass('hidden')
@@ -124,37 +133,61 @@ function init() {
     $('.item-info').addClass('hidden');
     $('.main').removeClass('hidden');
   })
-  $('#add-location-input').on('click', function(event) {
+  $('.add-location-input, .add-location').on('click', function(event) {
     var locationInput = prompt("Please enter a location name")
-    console.log(locationInput)
+    if(locationInput.length) {
+    	addLocation(locationInput)
+  		renderLocations()
+    } else {
+    	alert("you need to enter a location name")
+    }
+    
   })
-  $('#add-image').on('click', function(event) {
-    prompt("Please enter an image URL")
+  $('#add-image, #edit-image').on('click', function(event) {
+    var url = prompt("Please enter an image URL")
+    state.image = url;
   })
-  $('.results').on('click', '.item-left', function(event) {
-		axios.get('/items/'+ $(this).data('product-id'))
+  $('.results').on('click', 'li', function(event) {
+		axios.get('/items/'+ $(this).find('.item-left').data('product-id'))
 			.then(function({ data }) {		
+			console.log(data)
 		    $('#edit-product').val(data.product)
 		    $('#edit-quantity').val(data.quantity)
 		    $('#edit-form').val(data.form)
 		    $('#edit-hazardous').val(data.hazardous)
 		    $('#edit-location').val(data.location)
 		    $('.edit-item-form').data('product-id', data.id)
+		    $('.add-inventory-form').data('product-id', data.id)
 		    $('.main').addClass('hidden')
 		    $('.item-info').removeClass('hidden')
 			})
 	})
-	$('.edit-item-form').on('submit', function(event) {
-  	event.preventDefault();
-  	editProduct($(this).data('product-id'));
+	
+  $('.edit-item-form').on('submit', function(event) {
+  	event.preventDefault()
+  })
+  $('#edit-item').on('click', function(event) {
+  	editProduct($('.edit-item-form').data('product-id'));
   })
   $('#delete').on('click',function(event){
   	event.preventDefault();
   	deleteProduct($('.edit-item-form').data('product-id'))
-  	getProducts();
-  	$('.main').removeClass('hidden');
-  	$('.edit-item-form').addClass('hidden')
+  	$('.item-info').addClass('hidden')
+	$('.main').removeClass('hidden')
   }) 
+  $('.search-input').on('keypress', function(event) {
+  	var that = this
+  	var filtered_items = global_items.filter(function(item){
+	  var query = $(that).val()
+	  var regex = new RegExp(query, 'gi')
+	  return item.product.match(regex)
+	})
+	if (filtered_items.length) {
+		showProducts(filtered_items)
+	} else {
+		showProducts(global_items)
+	}
+  })
 }
 
 

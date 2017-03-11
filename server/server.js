@@ -5,7 +5,7 @@ const morgan = require('morgan');
 const path = require('path');
 
 const {DATABASE_URL, PORT} = require('./config');
-const {InventoryList} = require('./models');
+const {InventoryList, LocationList} = require('./models');
 
 const app = express();
 
@@ -32,6 +32,19 @@ app.get('/items', (req, res) => {
   	})
 });
 
+app.get('/locations', (req,res) => {
+  LocationList
+  .find()
+  .exec()
+  .then(locations => {
+    res.json(locations.map(location => location.apiRepr()));
+  })
+  .catch(err => {
+    console.error(err);
+    res.status(500).json({error: 'something went horribly awry',message: err})
+  })
+})
+
 app.get('/items/:id', (req, res) => {
   InventoryList
   .findById(req.params.id)
@@ -43,6 +56,17 @@ app.get('/items/:id', (req, res) => {
   })
 })
 
+/*app.get('/locations/:id', (req, res) => {
+  LocationList
+  .findById(req.params.id)
+  .exec()
+  .then(location => res.json(location.apiRepr()))
+  .catch(err => {
+    console.error(err)
+    res.status(500).json({error: 'something went horribly awry'})
+  })
+})*/
+
 app.post('/items', (req,res) => {
   const requiredFields = ['product','location','form','quantity','hazardous'];
   for (let i=0; i<requiredFields.length;i++) {
@@ -53,19 +77,43 @@ app.post('/items', (req,res) => {
         return res.status(400).send(message);
     }
   }
-
   InventoryList
     .create({
       product: req.body.product,
       form: req.body.form,
       hazardous: req.body.hazardous,
       location: req.body.location,
-      quantity: req.body.quantity
+      quantity: req.body.quantity,
+      url: req.body.url
     })
-    .then(item => res.status(201).json(item.apiRepr()))
+    .then(item => {
+      res.status(201).json(item.apiRepr())
+    })
     .catch(err => {
       console.error(err);
-      res.status(500).json({error: 'Something went wrong'});
+      res.status(500).json({error: 'Something went wrong in InventoryList.create'});
+    });
+});
+
+app.post('/locations', (req,res) => {
+  const requiredFields = ['name'];
+  for (let i=0; i<requiredFields.length;i++) {
+    const field = requiredFields[i];
+    if (!(field in req.body)) {
+      const message = `Missing ${field} in request body`
+        console.error(message);
+        return res.status(400).send(message);
+    }
+  }
+
+  LocationList
+    .create({
+      name: req.body.name
+    })
+    .then(location => res.status(201).json(location.apiRepr()))
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({error: 'Something went wrong in LocationList.create'});
     });
 });
 
@@ -76,7 +124,7 @@ app.put('/items/:id', (req, res) => {
     });
   }
   const updated = {}
-  const updateableFields = ['product','form','hazardous', 'location', 'quantity'];
+  const updateableFields = ['product','form','hazardous', 'location', 'quantity', 'url'];
   updateableFields.forEach(field => {
     if (field in req.body) {
       updated[field] = req.body[field];
@@ -90,6 +138,26 @@ app.put('/items/:id', (req, res) => {
     .catch(err => res.status(500).json({message: 'Something went wrong'}));
 });
 
+/*app.put('/locations/:id', (req,res) => {
+  if (req.params.id && req.body.id && req.params.id !== req.body.id) {
+    return res.status(400).json({
+      error: 'Request path id and request body id values must match'
+    });
+  }
+  const updated = {}
+  const updateableFields = ['location','name','date'];
+  updateableFields.forEach(field => {
+    if (field in req.body) {
+      updated[field] = req.body[field];
+    }
+  })
+  LocationList
+    .findByIdAndUpdate(req.params.id, {$set: updated}, {new: true})
+    .exec()
+    .then(updatedLocation => res.status(201).json(updatedLocation.apiRepr()))
+    .catch(err => res.status(500).json({message: 'Something went wrong'}));
+})*/
+
 app.delete('/items/:id', (req, res) => {
   InventoryList
   .findByIdAndRemove(req.params.id)
@@ -101,6 +169,15 @@ app.delete('/items/:id', (req, res) => {
   })
 })
 
+app.delete('/locations/:id', (req,res) => {
+  LocationList
+  .findByIdAndRemove(req.params.id)
+  .exec()
+  .then(() => {
+    console.log('Deleted blog post with id ${req.params.id}');
+    res.status(204).end();
+  })
+})
 let server;
 
 function runServer(databaseUrl=DATABASE_URL, port=PORT) {

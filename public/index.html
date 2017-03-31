@@ -7,10 +7,32 @@
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
 </head>
 <body>
-	<form name="search-form" class="search-form">
+	<div class="nav">
+		<div class="navlinks">
+		<h1 align="center">Inventory App</h1>
+			<ul>
+				<li><a href="#home" id="home">Home</a></li>
+				<li><a href="#search-link" id="search-link">Search</a></li>
+				<li><a href="#add-inventory" id="add-inventory-link">Add Inventory</a></li>
+				<li><a href="#about" id="about-link">About</a></li>
+			</ul>	
+		</div>
+	</div>
+	<form name="landing-page" class="landing-page" id="land-page">
+	<div class="intro">
+		<h1 align="center">About this app</h1>
+		<p> Hello there! This is an application for small to medium sized companies who want to keep track of their inventory. </p>
+		<p> You are allowed to add, edit, view, and delete any inventory as well as assigning locations to any products for organizational purposes! </p>
+		<h1 align="center">About Me</h1>
+		<p>Hi, my name is Damian Sopel. I am 23 years old and a UW-Madison graduate with a B.S. in statistics and a passion
+		for web development. This application demonstrates my abilities in front and back-end programming.</p>
+		<Button id="enter">Enter</Button> 
+	</div>
+	</form>
+	<form name="search-form" class="search-form hidden" id="s-form">
 		<div class="main">
 			<input type="text" class="search-input" placeholder="Search for inventory...">
-			<button id="add">Add items to your inventory</button>
+			<button id="add">Add items</button>
 			<!-- <select id="form">
 				<option value="form">Form</option>
 				<option value="solid">Solid</option>
@@ -21,63 +43,98 @@
 				<option value="yes">Yes</option>
 				<option value="no">No</option>
 			</select> -->
-			<select id="search-location"></select>
-			<ul class="results"></ul>
+			<div class="location-container">
+				<select id="search-location"></select>
+				<ul class="results"></ul>
+			</div>	
 		</div>
 	</form>
-	<form name="add-form" class="add-inventory-form">	
-		<div class="add-inventory hidden">
-			<label for="add-name">Product Name: </label>
-			<input type="text" id="add-name" required placeholder="Product Name"/>
-			<label for="add-qty">Quantity: </label>
-			<input type="number" id="add-qty" min="0" required placeholder="Add quantity"/>
-			<label for="add-location"> Location: </label>
-			<select id="add-location" required></select>
-			<label for="form"> Form: </label>
-			<select id="add-form" required>
-				<option>Form</option>
-				<option value="solid">Solid</option>
-				<option value="liquid">Liquid</option>
-				<option value="gas">Gas</option>
-			</select>
-
-			<label for="add-hazardous" required>Hazardous:</label>
-			<select id="add-hazardous" required>
-				<option value="yes">Yes</option>
-				<option value="no">No</option>
-			</select>
-			<button class="add-location-input">Add Location</button>
+	<form name="add-form" class="add-inventory-form hidden">	
+		<div class="add-inventory">
+			<div class="add-item-container">
+				<div class="picture-container">
+					<img src="http://placehold.it/100x100" class="item-img" />
+				</div>
+				<button id="add-image" type="button">Add/Edit Image</button>
+				<div class="block">
+					<label for="add-name">Product Name: </label>
+					<input type="text" id="add-name" required placeholder="Product Name"/>
+				</div>
+				<div>
+					<label for="add-hazardous" required>Hazardous:</label>
+					<select id="add-hazardous" required>
+						<option value="yes">Yes</option>
+						<option value="no">No</option>
+					</select>
+				</div>
+				<div class="block">	
+					<label for="form"> Form: </label>
+					<select id="add-form" required>
+						<option>Form</option>
+						<option value="solid">Solid</option>
+						<option value="liquid">Liquid</option>
+						<option value="gas">Gas</option>
+					</select>
+				</div>
+				<div class="block">	
+					<label for="add-location"> Location: </label>
+					<select id="add-location" required></select>
+					<button class="add-location-input">Add Location</button>
+				</div>
+				<div class="block">
+					<label for="add-qty">Quantity: </label>
+					<input type="number" id="add-qty" min="0" required placeholder="Add quantity"/>
+				</div>
 				<!-- add input with add button that allows user to add a location -->
-			<button id="add-image" type="button">Add Image</button>
-			<button id="submit" type="submit">Submit</button>
-			<button class="back" type="button">Back</button>
+					<div class="button-block">
+				<button class="back" type="button">Back</button>
+				<button id="submit" type="submit">Submit</button>
+					</div>
+			</div>
 		</div>
 	</form>	
-	<form name="edit-form" class="edit-item-form">		
-		<div class="item-info hidden">
-			<label for="edit-product">Product:</label>
-			<input type="text" required id="edit-product" class="edit-input"/>
-			<label for="edit-form">Form:</label>
-			<select id="edit-form" required class="edit-input">
-				<option>Form</option>
-				<option value="solid">Solid</option>
-				<option value="liquid">Liquid</option>
-				<option value="gas">Gas</option>
-			</select>
-			<label for="edit-quantity">Quantity:</label>
-			<input type="number" required id="edit-quantity" class="edit-input"/>
-			<label for="hazardous">Hazardous?</label>
-			<select id="edit-hazardous" required class="edit-hazardous">
-				<option value="yes">Yes</option>
-				<option value="no">No</option>
-			</select>
-			<label for="location" >Location</label>
-			<select id="edit-location" required></select>
-			<button id="edit-item">Edit Item</button>
-			<button id="edit-image">Edit Image</button>
-			<button class="add-location-input">Add Location</button>
-			<button id="delete">Delete</button>
-			<button class="back">Back</button>
+	<form name="edit-form" class="edit-item-form hidden">		
+		<div class="item-info">
+			<div class="edit-item-container">
+				<div class="picture-container">
+					<img src="http://placehold.it/100x100" class="item-img" />
+				</div>
+				<button id="edit-image">Edit Image</button>
+				<div class="block">
+					<label for="edit-product">Product:</label>
+					<input type="text" required id="edit-product" class="edit-input"/>
+				</block>
+				<div class="block">
+					<label for="hazardous">Hazardous?</label>
+					<select id="edit-hazardous" required class="edit-hazardous">
+						<option value="yes">Yes</option>
+						<option value="no">No</option>
+					</select>
+				</block>
+				<div class="block">
+					<label for="edit-form">Form:</label>
+					<select id="edit-form" required class="edit-input">
+						<option>Form</option>
+						<option value="solid">Solid</option>
+						<option value="liquid">Liquid</option>
+						<option value="gas">Gas</option>
+					</select>
+				</block>
+				<div class="block">
+					<label for="location" >Location</label>
+					<select id="edit-location" required></select>
+					<button class="add-location-input">Add Location</button>
+				</div>
+				<div class="block">
+					<label for="edit-quantity">Quantity:</label>
+					<input type="number" required id="edit-quantity" class="edit-input"/>
+				</div>
+				<div class="button-block">
+					<button id="delete">Delete</button>
+					<button class="back">Back</button>
+					<button id="edit-item">Edit Item</button>
+				</div>
+			</div>
 		</div>
 	</form>	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>

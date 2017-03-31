@@ -57,8 +57,8 @@ function addProduct() {
 			$('#add-hazardous').val(null)
 			$('#add-location').val(null)
 			$('#add-qty').val(0)
-			$('.add-inventory').addClass('hidden');
-		  $('.main').removeClass('hidden');
+			$('.add-inventory-form').addClass('hidden');
+		  $('.search-form').removeClass('hidden');
 		  getProducts();
 		  state.image = '';
 		})
@@ -85,7 +85,7 @@ function deleteProduct(id) {
 	axios.delete('/items/' + id)
 	.then(function(res) {
 		//$('.item-info').addClass('hidden')
-		//$('.main').removeClass('.hidden')
+		//$('.search-form').removeClass('.hidden')
 		getProducts();
 	})
 	.catch(function(err){
@@ -107,7 +107,7 @@ function editProduct(id) {
 			getProducts();
 			state.image = '';
 			$('.item-info').addClass('hidden')
-			$('.main').removeClass('hidden')
+			$('.search-form').removeClass('hidden')
 		})
 		.catch(function(err){
 			console.error(err)
@@ -124,17 +124,18 @@ function init() {
     event.preventDefault();
   })
   $('#add').on('click', function(event) {
-    $('.main').addClass('hidden')
-    $('.add-inventory').removeClass('hidden')
+    $('.search-form').addClass('hidden')
+    $('.add-inventory-form').removeClass('hidden')
   })
-  $('.add-inventory .back').on('click', function(event) {
-    $('.add-inventory').addClass('hidden');
-    $('.main').removeClass('hidden');
+  $('.add-inventory-form .back').on('click', function(event) {
+    $('.add-inventory-form').addClass('hidden');
+    $('.search-form').removeClass('hidden');
   })
   $('.item-info .back').on('click', function(event) {
     $('.item-info').addClass('hidden');
-    $('.main').removeClass('hidden');
+    $('.search-form').removeClass('hidden');
   })
+
   $('.add-location-input, .add-location').on('click', function(event) {
     var locationInput = prompt("Please enter a location name")
     if(locationInput.length) {
@@ -148,6 +149,8 @@ function init() {
   $('#add-image, #edit-image').on('click', function(event) {
     var url = prompt("Please enter an image URL")
     state.image = url;
+    var img_url = $('.item-img').attr("src", state.image)
+    console.log($('.item-img').attr("src"))
   })
   $('.results').on('click', 'li', function(event) {
 		axios.get('/items/'+ $(this).find('.item-left').data('product-id'))
@@ -160,11 +163,31 @@ function init() {
 		    $('#edit-location').val(data.location)
 		    $('.edit-item-form').data('product-id', data.id)
 		    $('.add-inventory-form').data('product-id', data.id)
-		    $('.main').addClass('hidden')
+		    $('.search-form').addClass('hidden')
 		    $('.item-info').removeClass('hidden')
+		    $('.item-img').attr("src", state.image)
 			})
 	})
-	
+  $('#enter').on('click',function(event) {
+  	$('.landing-page').addClass('hidden')
+  	$('.search-form').removeClass('hidden')
+  	event.preventDefault();
+  })	
+  $('#home').on('click',function(event) {
+  	event.preventDefault()
+  	$('form').addClass('hidden')
+  	$('#land-page').removeClass('hidden')
+  })
+  $('#search-link').on('click',function(event) {
+  	console.log("wutface")
+  	$('form').addClass('hidden')
+  	$('.search-form').removeClass('hidden')
+  	event.preventDefault()
+  })
+  $('#add-inventory-link').on('click',function(event) {
+  	$('form').addClass('hidden')
+  	$('.add-inventory-form').removeClass('hidden')
+  })
   $('.edit-item-form').on('submit', function(event) {
   	event.preventDefault()
   })
@@ -175,7 +198,7 @@ function init() {
   	event.preventDefault();
   	deleteProduct($('.edit-item-form').data('product-id'))
   	$('.item-info').addClass('hidden')
-	$('.main').removeClass('hidden')
+	$('.search-form').removeClass('hidden')
   }) 
   $('.search-input').on('keypress', function(event) {
   	var that = this

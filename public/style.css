@@ -2,9 +2,69 @@
 	display: none;
 }
 
-li {
+.landing-page {
+  text-align:center;
+}
+
+.navlinks li::after {
+    content:"|";
+}
+
+body {
+  margin:0;
+}
+
+a {
+    padding: 0px 15px 0px 12px;
+    text-decoration: none
+}
+
+.navlinks li:last-of-type {
+  content:none;
+}
+.picture-container {
+  display: inline-block;
+}
+.nav {
+    padding: 10px;
+    border-bottom: 1px solid black;
+    background-color: white;
+}
+
+#add-image {
+  margin-bottom: 9%;
+  margin-left: 8%;
+}
+
+.location-filter {
+  float:right;
+}
+
+.intro {
+    display: inline-block;
+    margin-top: 10%;
+    box-shadow: 0 0 5px rgba(0,0,0,0.3);
+    width: 80%;
+    padding: 10px;
+    border: 1px solid black;
+    background: white;
+}
+
+
+.add-item-container, .edit-item-container {
+display: inline-block;
+margin-top: 10%;
+box-shadow: 0 0 5px rgba(0,0,0,0.3);
+width: 50%;
+padding: 10px;
+border: 1px solid black;
+background: white;
+margin-left: 25%;
+}
+
+.results li {
 	display: flex;
-	background-color: rgba(0,0,0,0.03);
+	background-color: white;
   box-shadow: -3px 2px 8px -3px rgba(0,0,0,0.4);
 	max-width: 500px;
 	margin-bottom: 10px;
@@ -14,10 +74,17 @@ li {
 	transition: all 0.2s ease-in-out;
 }
 
-li:hover {
+.results li:hover {
 	transform: translateX(10px);
-	background-color: rgba(0,0,0,0);
+	background-color: #fafafa;
 	transition: all 0.2s ease-in-out;
+}
+
+#search-location {
+  display: inline-block;
+  position: absolute;
+  right: 10px;
+  top: 110px;
 }
 
 ul { 
@@ -44,32 +111,68 @@ img {
 }
 
 body {
-	background-image: url('http://wallpapercave.com/wp/hC9nmDb.png');
-	
+  background:lightgray;
+}
 
+#enter {
+    height: 45px;
+    width: 150px;
+    font-size: 13pt;
+    margin: 25px 0 35px;
+    display:inline-block;
+}
+
+#add {
+  display:block;
+  float: right;
+  height: 45px;
+  width: 150px;
+  background: royalblue;
+}
+
+.navlinks ul {
+float:right;
+position:relative;
+list-style: none;
+}
+
+.navlinks h1 {
+position: absolute;
+top: -8px;
+display: inline-block;
+}
+
+.navlinks {
+  height: 50px;
+ margin-bottom: 5px;
+}
+
+.navlinks li {
+  display: inline-block;
 }
 
 button {
    border-top: 1px solid #96d1f8;
-   background: #65a9d7;
-   background: -webkit-gradient(linear, left top, left bottom, from(#3e779d), to(#65a9d7));
-   background: -webkit-linear-gradient(top, #3e779d, #65a9d7);
-   background: -moz-linear-gradient(top, #3e779d, #65a9d7);
-   background: -ms-linear-gradient(top, #3e779d, #65a9d7);
-   background: -o-linear-gradient(top, #3e779d, #65a9d7);
-   padding: 10.5px 21px;
-   -webkit-border-radius: 9px;
-   -moz-border-radius: 9px;
-   border-radius: 9px;
-   -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
-   -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
-   box-shadow: rgba(0,0,0,1) 0 1px 0;
-   text-shadow: rgba(0,0,0,.4) 0 1px 0;
-   color: white;
-   font-size: 10px;
-   font-family: 'Lucida Grande', Helvetica, Arial, Sans-Serif;
-   text-decoration: none;
-   vertical-align: middle;
+  background: #65a9d7;
+  background: -webkit-gradient(linear, left top, left bottom,#f5f5dc);
+  background: -webkit-linear-gradient(top, #3e779d, #65a9d7);
+  background: -moz-linear-gradient(top, #3e779d, #65a9d7);
+  background: -ms-linear-gradient(top, #3e779d, #65a9d7);
+  background: -o-linear-gradient(top, #3e779d, #65a9d7);
+  padding: 10.5px 21px;
+  -webkit-border-radius: 9px;
+  -moz-border-radius: 9px;
+  border-radius: 9px;
+  -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+  -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+  box-shadow: rgba(0,0,0,1) 0 1px 0;
+  text-shadow: rgba(0,0,0,.4) 0 1px 0;
+  color: #f5f5dc;
+  font-size: 10px;
+  font-family: 'Lucida Grande', Helvetica, Arial, Sans-Serif;
+  text-decoration: none;
+  vertical-align: middle;
+  margin: 10px;
    }
 button:hover {
    border-top-color: #09456e;
@@ -81,9 +184,10 @@ button:active {
    background: #19872e;
    }
 
-input[type="text"] {
+.search-input {
   box-sizing: border-box;
-  width: 85%;
+  width: 80%;
+  display: block;
   height: calc(4em + 1px);
   margin: 0 0 1em;
   padding: 1em;
@@ -93,6 +197,33 @@ input[type="text"] {
   outline: none;
 }
 
+#add-name {
+  box-sizing: border-box;
+  width: 50%;
+  display: inline-block;
+  height: calc(2em + 1px);
+  margin: 0 0 1em;
+  padding: 1em;
+  border: 1px solid #ccc;
+  background: #fff;
+  resize: none;
+  outline: none;
+}
+
+.block {
+  display:block;
+  margin-bottom:10px;
+}
+
+.button-block {
+  float:right;
+}
+label {
+  display:inline-block;
+  margin-right:5px;
+  text-align:right;
+  width:140px;
+}
 html {
 	font-family: 'Source Sans Pro', sans-serif;
 }

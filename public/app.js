@@ -179,7 +179,6 @@ function init() {
   	$('#land-page').removeClass('hidden')
   })
   $('#search-link').on('click',function(event) {
-  	console.log("wutface")
   	$('form').addClass('hidden')
   	$('.search-form').removeClass('hidden')
   	event.preventDefault()
@@ -195,9 +194,8 @@ function init() {
   	editProduct($('.edit-item-form').data('product-id'));
   })
   $('#delete').on('click',function(event){
-  	event.preventDefault();
   	deleteProduct($('.edit-item-form').data('product-id'))
-  	$('edit-item-form').addClass('hidden')
+  	$('.edit-item-form').addClass('hidden')
 	$('.search-form').removeClass('hidden')
   }) 
   $('.search-input').on('keypress', function(event) {

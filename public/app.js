@@ -106,7 +106,7 @@ function editProduct(id) {
 		.then(function(res) {
 			getProducts();
 			state.image = '';
-			$('.item-info').addClass('hidden')
+			$('.edit-item-form').addClass('hidden')
 			$('.search-form').removeClass('hidden')
 		})
 		.catch(function(err){
@@ -131,8 +131,8 @@ function init() {
     $('.add-inventory-form').addClass('hidden');
     $('.search-form').removeClass('hidden');
   })
-  $('.item-info .back').on('click', function(event) {
-    $('.item-info').addClass('hidden');
+  $('.edit-item-form .back').on('click', function(event) {
+    $('.edit-item-form').addClass('hidden');
     $('.search-form').removeClass('hidden');
   })
 
@@ -164,7 +164,7 @@ function init() {
 		    $('.edit-item-form').data('product-id', data.id)
 		    $('.add-inventory-form').data('product-id', data.id)
 		    $('.search-form').addClass('hidden')
-		    $('.item-info').removeClass('hidden')
+		    $('.edit-item-form').removeClass('hidden')
 		    $('.item-img').attr("src", state.image)
 			})
 	})
@@ -197,7 +197,7 @@ function init() {
   $('#delete').on('click',function(event){
   	event.preventDefault();
   	deleteProduct($('.edit-item-form').data('product-id'))
-  	$('.item-info').addClass('hidden')
+  	$('edit-item-form').addClass('hidden')
 	$('.search-form').removeClass('hidden')
   }) 
   $('.search-input').on('keypress', function(event) {

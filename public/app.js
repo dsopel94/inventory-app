@@ -58,6 +58,7 @@ function addProduct() {
 			$('#add-location').val(null)
 			$('#add-qty').val(0)
 			$('.item-img').attr('src','http://placehold.it/100x100')
+			state.image=''
 			console.log(state.image)
 			$('.add-inventory-form').addClass('hidden');
 		  $('.search-form').removeClass('hidden');
@@ -88,6 +89,7 @@ function deleteProduct(id) {
 		//$('.item-info').addClass('hidden')
 		//$('.search-form').removeClass('.hidden')
 		$('.item-img').attr('src','http://placehold.it/100x100')
+		state.image= '';
 		getProducts();
 	})
 	.catch(function(err){
@@ -108,6 +110,7 @@ function editProduct(id) {
 		.then(function(res) {
 			getProducts();
 			$('.item-img').attr('src','http://placehold.it/100x100')
+			state.image = ''
 			$('.edit-item-form').addClass('hidden')
 			$('.search-form').removeClass('hidden')
 		})

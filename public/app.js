@@ -57,10 +57,11 @@ function addProduct() {
 			$('#add-hazardous').val(null)
 			$('#add-location').val(null)
 			$('#add-qty').val(0)
+			$('.item-img').attr('src','http://placehold.it/100x100')
+			console.log(state.image)
 			$('.add-inventory-form').addClass('hidden');
 		  $('.search-form').removeClass('hidden');
 		  getProducts();
-		  state.image = '';
 		})
 		.catch(function(err){
 			console.error(err)
@@ -86,6 +87,7 @@ function deleteProduct(id) {
 	.then(function(res) {
 		//$('.item-info').addClass('hidden')
 		//$('.search-form').removeClass('.hidden')
+		$('.item-img').attr('src','http://placehold.it/100x100')
 		getProducts();
 	})
 	.catch(function(err){
@@ -105,7 +107,7 @@ function editProduct(id) {
 	axios.put('/items/' + id, editProd)
 		.then(function(res) {
 			getProducts();
-			state.image = '';
+			$('.item-img').attr('src','http://placehold.it/100x100')
 			$('.edit-item-form').addClass('hidden')
 			$('.search-form').removeClass('hidden')
 		})
@@ -117,7 +119,7 @@ function editProduct(id) {
 
 function init() {
   $('.add-inventory-form').on('submit', function(event) {
-    event.preventDefault();
+  	event.preventDefault();
     addProduct();
   })
    $('.search-form').on('submit', function(event) {
@@ -137,6 +139,7 @@ function init() {
   })
 
   $('.add-location-input, .add-location').on('click', function(event) {
+  	event.preventDefault();
     var locationInput = prompt("Please enter a location name")
     if(locationInput.length) {
     	addLocation(locationInput)

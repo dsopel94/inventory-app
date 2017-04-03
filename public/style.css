@@ -197,19 +197,6 @@ button:active {
   outline: none;
 }
 
-#add-name {
-  box-sizing: border-box;
-  width: 50%;
-  display: inline-block;
-  height: calc(2em + 1px);
-  margin: 0 0 1em;
-  padding: 1em;
-  border: 1px solid #ccc;
-  background: #fff;
-  resize: none;
-  outline: none;
-}
-
 .block {
   display:block;
   margin-bottom:10px;

@@ -136,11 +136,13 @@ function init() {
     $('.add-inventory-form').addClass('hidden');
     $('.search-form').removeClass('hidden');
     $('.item-img').attr('src','http://placehold.it/100x100')
+    state.image= '';
   })
   $('.edit-item-form .back').on('click', function(event) {
     $('.edit-item-form').addClass('hidden');
     $('.search-form').removeClass('hidden');
     $('.item-img').attr('src','http://placehold.it/100x100')
+    state.image=""
   })
 
   $('.add-location-input, .add-location').on('click', function(event) {

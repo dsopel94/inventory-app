@@ -132,10 +132,12 @@ function init() {
   $('.add-inventory-form .back').on('click', function(event) {
     $('.add-inventory-form').addClass('hidden');
     $('.search-form').removeClass('hidden');
+    $('.item-img').attr('src','http://placehold.it/100x100')
   })
   $('.edit-item-form .back').on('click', function(event) {
     $('.edit-item-form').addClass('hidden');
     $('.search-form').removeClass('hidden');
+    $('.item-img').attr('src','http://placehold.it/100x100')
   })
 
   $('.add-location-input, .add-location').on('click', function(event) {
@@ -187,6 +189,7 @@ function init() {
   	event.preventDefault()
   })
   $('#add-inventory-link').on('click',function(event) {
+  	$('.item-img').attr('src','http://placehold.it/100x100')
   	$('form').addClass('hidden')
   	$('.add-inventory-form').removeClass('hidden')
   })

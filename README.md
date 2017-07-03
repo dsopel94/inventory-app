@@ -1,5 +1,5 @@
 # Inventory Management System
-An MVP application that lets basic inventory management system for small to medium inventory centric businesss.
+An MVP application for basic inventory management system for small to medium inventory centric businessses.
 ### API
 -- `GET`
 `/inventory`

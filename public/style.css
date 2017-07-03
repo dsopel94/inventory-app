@@ -127,7 +127,7 @@ body {
   float: right;
   height: 45px;
   width: 150px;
-  background: royalblue;
+  margin-right: 10px;
 }
 
 .navlinks ul {
@@ -152,7 +152,7 @@ display: inline-block;
 }
 
 button {
-   border-top: 1px solid #96d1f8;
+   /*border-top: 1px solid #96d1f8;
   background: #65a9d7;
   background: -webkit-gradient(linear, left top, left bottom,#f5f5dc);
   background: -webkit-linear-gradient(top, #3e779d, #65a9d7);
@@ -172,17 +172,23 @@ button {
   font-family: 'Lucida Grande', Helvetica, Arial, Sans-Serif;
   text-decoration: none;
   vertical-align: middle;
-  margin: 10px;
+  margin: 10px;*/
+  vertical-align: middle;
+  border: 2px solid black;
    }
 button:hover {
-   border-top-color: #09456e;
-   background: #09456e;
-   color: #ccc;
+   color:black;
+   background-color: #F5F5F5;
    }
 button:active {
-   border-top-color: #19872e;
-   background: #19872e;
+   color:black;
+   background-color: #F5F5F5;
    }
+#edit-image {
+  margin-left: 45px;
+  margin-bottom: 30px;
+}
+
 
 .search-input {
   box-sizing: border-box;

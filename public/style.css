@@ -4,10 +4,18 @@
 
 .landing-page {
   text-align:center;
+  background-image: url('http://luxreview.com/upload/system/2016/03/07133245.jpg');
+  padding-bottom: 100px;
+  background-size: cover;
+  opacity: .75;
 }
 
 .navlinks li::after {
     content:"|";
+}
+
+.navlinks li:last-child:after {
+    content: '';
 }
 
 body {
@@ -16,7 +24,9 @@ body {
 
 a {
     padding: 0px 15px 0px 12px;
-    text-decoration: none
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
 }
 
 .navlinks li:last-of-type {
@@ -32,8 +42,8 @@ a {
 }
 
 #add-image {
-  margin-bottom: 9%;
-  margin-left: 8%;
+  margin-bottom: 2%;
+  margin-left: 40px;
 }
 
 .location-filter {
@@ -48,6 +58,8 @@ a {
     padding: 10px;
     border: 1px solid black;
     background: white;
+    opacity: .7;
+    font-weight: bold;
 }
 
 
@@ -85,6 +97,11 @@ margin-left: 25%;
   position: absolute;
   right: 10px;
   top: 110px;
+}
+
+.add-location-input {
+  margin-left: 10px;
+  margin-bottom: 2px;
 }
 
 ul { 
@@ -185,14 +202,15 @@ button:active {
    background-color: #F5F5F5;
    }
 #edit-image {
-  margin-left: 45px;
-  margin-bottom: 30px;
+  margin-left: 40px;
+  margin-bottom: 11px;
 }
+
 
 
 .search-input {
   box-sizing: border-box;
-  width: 80%;
+  width: 45%;
   display: block;
   height: calc(4em + 1px);
   margin: 0 0 1em;
@@ -205,7 +223,6 @@ button:active {
 
 .block {
   display:block;
-  margin-bottom:10px;
 }
 
 .button-block {
@@ -216,6 +233,7 @@ label {
   margin-right:5px;
   text-align:right;
   width:140px;
+  margin: 5px 0px;
 }
 html {
 	font-family: 'Source Sans Pro', sans-serif;

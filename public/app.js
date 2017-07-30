@@ -158,6 +158,9 @@ function init() {
   })
   $('#add-image, #edit-image').on('click', function(event) {
     var url = prompt("Please enter an image URL")
+    if (url === null) {
+    	return;
+    }
     state.image = url;
     var img_url = $('.item-img').attr("src", state.image)
     console.log($('.item-img').attr("src"))
@@ -218,7 +221,8 @@ function init() {
 		})
 		if (filtered_items.length) {
 			showProducts(filtered_items)
-		} else {
+		}   
+		else { 
 			showProducts(global_items)
 		}
   })
@@ -233,7 +237,9 @@ function init() {
 		} else {
 			$('.results').html('<div>No Results</div>')
 		}
-
+	if (query === 'Filter By Location') {
+		showProducts(global_items)
+	}
   })
 }
 

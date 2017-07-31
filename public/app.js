@@ -14,17 +14,17 @@ function getProducts() {
 }
 
 function showProducts(items) {
-	var itemsHTML = [];
-	items.forEach(function(element) {
-		var url = element.url ? element.url : 'http://placehold.it/100x100'
-	  itemsHTML.push('<li><div class="item-left" data-product-id="' + element.id + '"><p><span class = "prod-name">' +
-	    'Product: ' + element.product + '</p></span><span class="prod-loc">' +
-	    'Location: ' + element.location + '</span><span class="qty">' +
-	    'Quantity: ' + element.quantity + '</span></div>' +
-	    '<div class="item-right"><img src="' + url +
-	    '"></div></li>')
-	});
-	$('.results').html(itemsHTML)
+    var itemsHTML = [];
+    items.forEach(function(element) {
+        var url = element.url ? element.url : 'http://placehold.it/100x100'
+        itemsHTML.push('<li><div class="item-left" data-product-id="' + element.id + '"><p><span class = "prod-name">' +
+            'Product: ' + element.product + '</p></span><span class="prod-loc">' +
+            'Location: ' + element.location + '</span><p><span class="qty">' +
+            'Quantity: ' + element.quantity + '</p></span>' +
+            'Hazardous: ' + element.hazardous + '</p></span></div>' +
+            '<div class="item-right"><img src="' + url + '"></div></li>')
+    });
+    $('.results').html(itemsHTML) 
 }
 
 function renderLocations() {

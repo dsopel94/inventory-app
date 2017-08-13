@@ -240,3 +240,139 @@ label {
 html {
   font-family: 'Source Sans Pro', sans-serif;
 }
+
+@media only screen and (max-device-width: 375px) {
+  .add-item-container, .edit-item-container {
+    display: inline-block;
+    margin-top: 10%;
+    box-shadow: 0 0 5px rgba(0,0,0,0.3);
+    width: 73%;
+    padding: 10px;
+    border: 1px solid black;
+    background: white;
+    margin-left: 10%;
+    height: 500px;
+}
+
+img {
+    height: 150px;
+    width: 150px;
+}
+
+#edit-image, #add-image {
+    margin-left: 8%;
+    margin-bottom: -4%;
+    margin-top: -71px;
+    padding: 13px 12px;
+    font-size: 13pt;
+}
+
+.navlinks li::after {
+    content: "|";
+    font-size: 23px;
+}
+
+h1 {
+  font-size: 35pt;
+}
+
+p {
+  font-size: 18pt;
+}
+
+span {
+  font-size: 18pt;
+}
+
+.navlinks h1 {
+    position: absolute;
+    top: -8px;
+    display: inline-block;
+    font-size: 27pt;
+}
+
+label {
+    display: inline-block;
+    margin-right: 5px;
+    text-align: right;
+    width: 140px;
+    margin: 5px 19px;
+    font-size: 20pt;
+}
+
+.edit-input {
+  padding: 7px 7px;
+  margin-left: 5px;
+}
+
+select {
+    padding: 5px;
+    margin-left: 5px;
+}
+
+button {
+    vertical-align: middle;
+    border: 2px solid black;
+    padding: 11px 10px;
+    font-size: 13pt;
+}
+
+.add-location-input {
+    margin-left: 25px;
+    margin-bottom: 2px;
+    padding: 5px 12px;
+}
+
+.button-block button {
+  padding: 10px 10px;
+}
+
+.add-item {
+  margin-right: 43% !important;
+}
+
+.button-block {
+    margin-top: 20px;
+    font-size: 19pt;
+    display: inline-block;
+    margin-right: 25%;
+}
+
+.delete {
+  padding: 10px 10px;
+}
+
+a {
+    padding: 0px 15px 0px 12px;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    font-size: 18pt;
+}
+
+html {
+  background-size: cover;
+  }
+
+.search-input {
+  width: 60%;
+}
+
+#search-location {
+    display: inline-block;
+    position: absolute;
+    right: 10px;
+    top: 88px;
+    height: 39px;
+}
+
+#add {
+    display: block;
+    float: right;
+    height: 45px;
+    width: 150px;
+    margin-right: 10px;
+    margin-top: 3px;
+}
+
+}

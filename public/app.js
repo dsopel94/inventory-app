@@ -21,7 +21,7 @@ function showProducts(items) {
             'Product: ' + element.product + '</p></span><span class="prod-loc">' +
             'Location: ' + element.location + '</span><p><span class="qty">' +
             'Quantity: ' + element.quantity + '</p></span>' +
-            'Hazardous: ' + element.hazardous + '</p></span></div>' +
+            '<span> Hazardous: ' + element.hazardous + '</p></span></div>' +
             '<div class="item-right"><img src="' + url + '"></div></li>')
     });
     $('.results').html(itemsHTML) 
